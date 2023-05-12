@@ -8,9 +8,15 @@
         
 
 import SwiftUI
+import UtilityClasses
 
 @main
 struct UtilityClassesTestingApp: App {
+    
+    init() {
+        WriteLog.info("Starting the test app.")
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

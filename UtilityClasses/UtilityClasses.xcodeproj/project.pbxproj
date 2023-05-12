@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E85C17AD2A0E611100949E66 /* WriteLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85C17AC2A0E611100949E66 /* WriteLog.swift */; };
 		E85C932C2A0E58F300DA65D3 /* UtilityClasses.docc in Sources */ = {isa = PBXBuildFile; fileRef = E85C932B2A0E58F300DA65D3 /* UtilityClasses.docc */; };
 		E85C932D2A0E58F300DA65D3 /* UtilityClasses.h in Headers */ = {isa = PBXBuildFile; fileRef = E85C932A2A0E58F300DA65D3 /* UtilityClasses.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E85C17AC2A0E611100949E66 /* WriteLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteLog.swift; sourceTree = "<group>"; };
 		E85C93272A0E58F300DA65D3 /* UtilityClasses.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UtilityClasses.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E85C932A2A0E58F300DA65D3 /* UtilityClasses.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UtilityClasses.h; sourceTree = "<group>"; };
 		E85C932B2A0E58F300DA65D3 /* UtilityClasses.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = UtilityClasses.docc; sourceTree = "<group>"; };
@@ -31,6 +33,7 @@
 		E85C17A62A0E5A8900949E66 /* Logging */ = {
 			isa = PBXGroup;
 			children = (
+				E85C17AC2A0E611100949E66 /* WriteLog.swift */,
 			);
 			path = Logging;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E85C17AD2A0E611100949E66 /* WriteLog.swift in Sources */,
 				E85C932C2A0E58F300DA65D3 /* UtilityClasses.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

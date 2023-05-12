@@ -8,6 +8,7 @@
         
 
 import SwiftUI
+import UtilityClasses
 
 struct ContentView: View {
     var body: some View {
@@ -18,6 +19,9 @@ struct ContentView: View {
             Text("Hello, world!")
         }
         .padding()
+        .onAppear {
+            WriteLog.success("Content View appeared")
+        }
     }
 }
 
