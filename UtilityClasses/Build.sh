@@ -1,4 +1,6 @@
-xcodebuild clean -scheme UtilityClasses -quiet
+xcodebuild clean -scheme UtilityClasses -destination 'generic/platform=iOS' -quiet
+
+xcodebuild clean -scheme UtilityClasses -destination 'generic/platform=iOS Simulator' -quiet
 
 echo '*** Delete the iphone archive and rebuild'
 rm -r './build/UtilityClasses.framework-iphoneos.xcarchive'
