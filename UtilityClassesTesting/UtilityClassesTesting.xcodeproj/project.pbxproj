@@ -13,6 +13,7 @@
 		E8AF6F9B2A0E5994006EE4FE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF6F9A2A0E5994006EE4FE /* ContentView.swift */; };
 		E8AF6F9D2A0E5995006EE4FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8AF6F9C2A0E5995006EE4FE /* Assets.xcassets */; };
 		E8AF6FA02A0E5995006EE4FE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8AF6F9F2A0E5995006EE4FE /* Preview Assets.xcassets */; };
+		E8B853222A1279F100125950 /* LoggingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B853212A1279F100125950 /* LoggingTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,6 +37,7 @@
 		E8AF6F9A2A0E5994006EE4FE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E8AF6F9C2A0E5995006EE4FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E8AF6F9F2A0E5995006EE4FE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E8B853212A1279F100125950 /* LoggingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 		E8AF6F972A0E5994006EE4FE /* UtilityClassesTesting */ = {
 			isa = PBXGroup;
 			children = (
+				E8B853202A1279DB00125950 /* LoggingTests */,
 				E8AF6F982A0E5994006EE4FE /* UtilityClassesTestingApp.swift */,
 				E8AF6F9A2A0E5994006EE4FE /* ContentView.swift */,
 				E8AF6F9C2A0E5995006EE4FE /* Assets.xcassets */,
@@ -92,6 +95,14 @@
 				E8AF6F9F2A0E5995006EE4FE /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E8B853202A1279DB00125950 /* LoggingTests */ = {
+			isa = PBXGroup;
+			children = (
+				E8B853212A1279F100125950 /* LoggingTests.swift */,
+			);
+			path = LoggingTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +178,7 @@
 			files = (
 				E8AF6F9B2A0E5994006EE4FE /* ContentView.swift in Sources */,
 				E8AF6F992A0E5994006EE4FE /* UtilityClassesTestingApp.swift in Sources */,
+				E8B853222A1279F100125950 /* LoggingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

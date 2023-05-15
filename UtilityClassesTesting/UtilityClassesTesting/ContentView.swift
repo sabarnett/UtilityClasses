@@ -12,15 +12,16 @@ import UtilityClasses
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
-        .padding()
-        .onAppear {
-            WriteLog.success("Content View appeared")
+        NavigationView {
+            VStack {
+                List {
+                    
+                    NavigationLink("Logging", destination: LoggingTests())
+                    
+                }
+                
+            }
+            .padding()
         }
     }
 }
