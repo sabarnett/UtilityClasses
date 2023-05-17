@@ -51,7 +51,7 @@ struct LoggingTests: View {
         })
         .onAppear {
             // Set the initial state to match the form state
-            WriteLog.startLogging(all: true)
+            loggingEnabled = WriteLog.isLogging()
         }
         .padding()
     }
@@ -99,6 +99,14 @@ struct LoggingTypesToggle: View {
             if newState { WriteLog.addLogLevel(.debug) }
             else { WriteLog.removeLogLevel(.debug) }
         })
+        .onAppear {
+            errorEnabled = WriteLog.isBeingLogged(.error)
+            warningEnabled = WriteLog.isBeingLogged(.warning)
+            successEnabled = WriteLog.isBeingLogged(.success)
+            infoEnabled = WriteLog.isBeingLogged(.info)
+            networkEnabled = WriteLog.isBeingLogged(.network)
+            debugEnabled = WriteLog.isBeingLogged(.debug)
+        }
     }
 }
 

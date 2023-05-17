@@ -79,6 +79,23 @@ public class WriteLog {
         logItems = []
     }
     
+    /// Tests whether a specific logging type is currently being logged.
+    ///
+    /// - Parameter logType: The LoggingType to test.
+    ///
+    /// - Returns: true if the type is being loged else false.
+    public class func isBeingLogged(_ logType: LoggingType) -> Bool {
+        logItems.contains(logType)
+    }
+    
+    /// Indicates whether logging is enabled or not.
+    ///
+    /// - Returns: true if logging is enabled, else false
+    ///
+    public class func isLogging() -> Bool {
+        enabled
+    }
+    
     /// Stops all further logging until the startLogging function is called.
     public class func stopLogging() {
         enabled = false
