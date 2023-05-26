@@ -1,13 +1,16 @@
 # ``UtilityClasses``
 
-<!--@START_MENU_TOKEN@-->Summary<!--@END_MENU_TOKEN@-->
+This is a framework of helpful classes.
 
-## Overview
+## WriteLog
 
-<!--@START_MENU_TOKEN@-->Text<!--@END_MENU_TOKEN@-->
+I have used SwiftyBeaver for logging in previous apps. It has the downside of adding
+a third party dependency to my code and introduces an overhead that I don't need for
+development. Remember, this isn't supposed to be an app log for use on released code,
+just a lightweight way to log actions during development. SwiftyBeaver was total
+over-kill for this but was also a great tool. 
 
-## Topics
+WriteLog is my lightweight alternative that gives me just enough logging to be
+useful without the overheads of a web logging system.
 
-### <!--@START_MENU_TOKEN@-->Group<!--@END_MENU_TOKEN@-->
-
-- <!--@START_MENU_TOKEN@-->``Symbol``<!--@END_MENU_TOKEN@-->
+![Log Writer](UtilityClasses/UtilityClasses/UtilityClasses.docc/Resources/writelog.png)
