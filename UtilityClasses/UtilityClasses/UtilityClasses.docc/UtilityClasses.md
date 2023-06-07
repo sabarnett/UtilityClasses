@@ -13,4 +13,4 @@ over-kill for this but was also a great tool.
 WriteLog is my lightweight alternative that gives me just enough logging to be
 useful without the overheads of a web logging system.
 
-![Log Writer](UtilityClasses/UtilityClasses/UtilityClasses.docc/Resources/writelog.png)
+![Log Writer](writelog.png)
