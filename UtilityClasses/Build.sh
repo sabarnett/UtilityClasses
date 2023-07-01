@@ -3,16 +3,18 @@ setopt NOGLOB
 
 cd "/Users/stevenbarnett/Documents/Code Files/Apps/Frameworks/UtilityClasses/UtilityClasses/"
 
+scheme="UtilityClasses"
+
 destinations=("generic/platform=iOS" 
 			  "generic/platform=iOS Simulator")
 			  
-archives=("./build/UtilityClasses.framework-iphoneos.xcarchive" 
-		  "./build/UtilityClasses.framework-iphonesimulator.xcarchive")
+archives=("./build/$scheme.framework-iphoneos.xcarchive" 
+		  "./build/$scheme.framework-iphonesimulator.xcarchive")
 
-frameworks=("./build/UtilityClasses.framework-iphoneos.xcarchive/Products/Library/Frameworks/UtilityClasses.framework"
-			"./build/UtilityClasses.framework-iphonesimulator.xcarchive/Products/Library/Frameworks/UtilityClasses.framework")
+frameworks=("./build/$scheme.framework-iphoneos.xcarchive/Products/Library/Frameworks/$scheme.framework"
+			"./build/$scheme.framework-iphonesimulator.xcarchive/Products/Library/Frameworks/$scheme.framework")
 
-xcframework="./build/UtilityClasses.xcframework"
+xcframework="./build/$scheme.xcframework"
 
 # ----------------------------------------------------------------------
 #
@@ -23,48 +25,59 @@ xcframework="./build/UtilityClasses.xcframework"
 length=${#destinations[@]}
 for (( ix=1; ix<=length; ix++ ));
 do
+   #
+   # Clean the target project and remove any previously generated archive
+   #
    echo "Clean ${destinations[$ix]}"
    xcodebuild clean \
-   -scheme UtilityClasses \
+   -scheme $scheme \
    -destination "${destinations[$ix]}" \
    -configuration Debug \
-   -quiet \
-   -userdefault=DVTEnableCoreDevice=enabled
+   -quiet
 
    rm -r "${archives[$ix]}"
    
-   echo "Build documentation for ${destinations[$ix]}"
-
-   xcodebuild docbuild \
-   -scheme UtilityClasses \
-   -destination "${destinations[$ix]}" \
-   -quiet \
-   -userdefault=DVTEnableCoreDevice=enabled
-
+   #
+   # Rebuild the framework first
+   #
    echo "Build the framework for ${destinations[$ix]}"
 
    xcodebuild archive \
-   -scheme UtilityClasses \
+   -scheme $scheme \
    -configuration Release \
    -destination "${destinations[$ix]}" \
    -archivePath "${archives[$ix]}" \
    -quiet \
    SKIP_INSTALL=NO \
-   BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
-   -userdefault=DVTEnableCoreDevice=enabled
+   BUILD_LIBRARY_FOR_DISTRIBUTION=YES
+
+   #
+   # Then rebuild the documentation
+   #
+   echo "Build documentation for ${destinations[$ix]}"
+
+   xcodebuild docbuild \
+   -scheme $scheme \
+   -destination "${destinations[$ix]}" \
+   -quiet
 
 done
 
+#
+# Now that the framework archives have been built, create the xcframework
+#
+# Note, we are building a parameter list for xcodebuild and the parameters will
+# contain spaces. So, we cannot use string concatenation or zsh will surround the
+# resulting string with quotes. The only legitimate way to get round this is to
+# build an array of  command line options and unwrap that.
 echo '*** Delete xcframework and rebuild'
 rm -r "${xcframework}"
 
 params=("-create-xcframework")
 for fwk in "${frameworks[@]}"
 do
-	params+=("-framework")
-	params+=("${fwk}")
+	params+=("-framework" "${fwk}")
 done
-params+=("-output")
-params+=("${xcframework}")
+params+=("-output" "${xcframework}")
 
 xcodebuild ${params[@]}
