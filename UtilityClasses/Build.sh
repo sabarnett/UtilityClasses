@@ -1,49 +1,70 @@
-xcodebuild clean -scheme UtilityClasses -destination 'generic/platform=iOS' -quiet
+#!/bin/zsh
+setopt NOGLOB
 
-xcodebuild clean -scheme UtilityClasses -destination 'generic/platform=iOS Simulator' -quiet
+cd "/Users/stevenbarnett/Documents/Code Files/Apps/Frameworks/UtilityClasses/UtilityClasses/"
 
-echo '*** Delete the iphone archive and rebuild'
-rm -r './build/UtilityClasses.framework-iphoneos.xcarchive'
+destinations=("generic/platform=iOS" 
+			  "generic/platform=iOS Simulator")
+			  
+archives=("./build/UtilityClasses.framework-iphoneos.xcarchive" 
+		  "./build/UtilityClasses.framework-iphonesimulator.xcarchive")
 
-echo 'Build the documentation'
-xcodebuild docbuild \
--scheme UtilityClasses \
--destination 'generic/platform=iOS' \
--quiet
+frameworks=("./build/UtilityClasses.framework-iphoneos.xcarchive/Products/Library/Frameworks/UtilityClasses.framework"
+			"./build/UtilityClasses.framework-iphonesimulator.xcarchive/Products/Library/Frameworks/UtilityClasses.framework")
 
-echo 'Build the framework'
-xcodebuild archive \
--scheme UtilityClasses \
--configuration Release \
--destination 'generic/platform=iOS' \
--archivePath './build/UtilityClasses.framework-iphoneos.xcarchive' \
--quiet \
-SKIP_INSTALL=NO \
-BUILD_LIBRARY_FOR_DISTRIBUTION=YES 
+xcframework="./build/UtilityClasses.xcframework"
 
-echo '*** Delete iphone simulator archive and rebuild'
-rm -r './build/UtilityClasses.framework-iphonesimulator.xcarchive'
+# ----------------------------------------------------------------------
+#
+# This is the build process. It is driven by the above variables
+#
+# ----------------------------------------------------------------------
 
-echo 'Build the documentation'
-xcodebuild docbuild \
--scheme UtilityClasses \
--destination 'generic/platform=iOS Simulator' \
--quiet
+length=${#destinations[@]}
+for (( ix=1; ix<=length; ix++ ));
+do
+   echo "Clean ${destinations[$ix]}"
+   xcodebuild clean \
+   -scheme UtilityClasses \
+   -destination "${destinations[$ix]}" \
+   -configuration Debug \
+   -quiet \
+   -userdefault=DVTEnableCoreDevice=enabled
 
-echo 'Build the framework'
-xcodebuild archive \
--scheme UtilityClasses \
--configuration Release \
--destination 'generic/platform=iOS Simulator' \
--archivePath './build/UtilityClasses.framework-iphonesimulator.xcarchive' \
--quiet \
-SKIP_INSTALL=NO \
-BUILD_LIBRARY_FOR_DISTRIBUTION=YES
+   rm -r "${archives[$ix]}"
+   
+   echo "Build documentation for ${destinations[$ix]}"
+
+   xcodebuild docbuild \
+   -scheme UtilityClasses \
+   -destination "${destinations[$ix]}" \
+   -quiet \
+   -userdefault=DVTEnableCoreDevice=enabled
+
+   echo "Build the framework for ${destinations[$ix]}"
+
+   xcodebuild archive \
+   -scheme UtilityClasses \
+   -configuration Release \
+   -destination "${destinations[$ix]}" \
+   -archivePath "${archives[$ix]}" \
+   -quiet \
+   SKIP_INSTALL=NO \
+   BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
+   -userdefault=DVTEnableCoreDevice=enabled
+
+done
 
 echo '*** Delete xcframework and rebuild'
-rm -r './build/UtilityClasses.xcframework'
+rm -r "${xcframework}"
 
-xcodebuild -create-xcframework \
--framework './build/UtilityClasses.framework-iphoneos.xcarchive/Products/Library/Frameworks/UtilityClasses.framework' \
--framework './build/UtilityClasses.framework-iphonesimulator.xcarchive/Products/Library/Frameworks/UtilityClasses.framework' \
--output './build/UtilityClasses.xcframework'
+params=("-create-xcframework")
+for fwk in "${frameworks[@]}"
+do
+	params+=("-framework")
+	params+=("${fwk}")
+done
+params+=("-output")
+params+=("${xcframework}")
+
+xcodebuild ${params[@]}
