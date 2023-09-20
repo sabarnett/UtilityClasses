@@ -33,7 +33,8 @@ do
    -scheme $scheme \
    -destination "${destinations[$ix]}" \
    -configuration Debug \
-   -quiet
+   -quiet \
+   LEX_SUPPRESS_WARNINGS=YES
 
    rm -r "${archives[$ix]}"
    
@@ -49,7 +50,8 @@ do
    -archivePath "${archives[$ix]}" \
    -quiet \
    SKIP_INSTALL=NO \
-   BUILD_LIBRARY_FOR_DISTRIBUTION=YES
+   BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
+   LEX_SUPPRESS_WARNINGS=YES
 
    #
    # Then rebuild the documentation
